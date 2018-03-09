@@ -395,6 +395,7 @@ var app = app || {};
     })();
 
 })(jQuery);
+
 var app = app || {};
 (function () {
 
@@ -433,9 +434,9 @@ var app = app || {};
 
     app.createDateRangePickerOptions = function (extraOptions) {
         extraOptions = extraOptions ||
-        {
-            allowFutureDate: false
-        };
+            {
+                allowFutureDate: false
+            };
 
         var options = {
             locale: {
@@ -467,8 +468,8 @@ var app = app || {};
 
     app.getUserProfilePicturePath = function (profilePictureId) {
         return profilePictureId ?
-                            (abp.appPath + 'Profile/GetProfilePictureById?id=' + profilePictureId) :
-                            (abp.appPath + 'Common/Images/default-profile-picture.png');
+            (abp.appPath + 'Profile/GetProfilePictureById?id=' + profilePictureId) :
+            (abp.appPath + 'Common/Images/default-profile-picture.png');
     }
 
     app.getUserProfilePicturePath = function () {
@@ -541,8 +542,25 @@ var app = app || {};
         var from = moment(fromTime);
         var to = moment(toTime);
         return to.diff(from, period);
-    }
+    };
 
+    app.htmlUtils = {
+        htmlEncodeText: function (value) {
+            return $("<div/>").text(value).html();
+        },
+
+        htmlDecodeText: function (value) {
+            return $("<div/>").html(value).text();
+        },
+
+        htmlEncodeJson: function (jsonObject) {
+            return JSON.parse(app.htmlUtils.htmlEncodeText(JSON.stringify(jsonObject)));
+        },
+
+        htmlDecodeJson: function (jsonObject) {
+            return JSON.parse(app.htmlUtils.htmlDecodeText(JSON.stringify(jsonObject)));
+        }
+    };
 })();
 /* Here, there are some custom plug-ins.
  * Developed for ASP.NET Iteration Zero (http://aspnetzero.com). */
@@ -952,11 +970,21 @@ var app = app || {};
                 .done(function (result) {
                     //store raw server response for custom rendering.
                     settings.rawServerResponse = result;
+
+                    //html encoding can be disabled by adding "disableResponseHtmlEncoding: true" to "listAction" field
+                    var dataItems;
+                    if (listAction.disableResponseHtmlEncoding) {
+                        dataItems = result.items;
+                    } else {
+                        //HTML encodes the response items for XSS protection.
+                        dataItems = app.htmlUtils.htmlEncodeJson(result.items);
+                    }
+
                     //invoke callback
                     callbackFunction({
                         recordsTotal: result.totalCount,
                         recordsFiltered: result.totalCount,
-                        data: result.items
+                        data: dataItems
                     });
                 });
         }
@@ -1701,4 +1729,3 @@ var app = app || {};
     };
 
 })();
-
