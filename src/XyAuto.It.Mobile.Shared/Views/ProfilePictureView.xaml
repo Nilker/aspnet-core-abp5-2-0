@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:base="clr-namespace:XyAuto.It.ViewModels.Base;assembly=XyAuto.It.Mobile.Shared"
+             xmlns:extensions="clr-namespace:XyAuto.It.Extensions.MarkupExtensions;assembly=XyAuto.It.Mobile.Shared"
+             x:Class="XyAuto.It.Views.ProfilePictureView"
+             base:ViewManager.AutoWireViewModel="true">
+    <ContentPage.Content>
+        <Grid
+              HorizontalOptions="FillAndExpand" 
+              VerticalOptions="FillAndExpand">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+     
+            <Image Grid.Row="0" 
+                   Source="{Binding Photo}" 
+                   HorizontalOptions="FillAndExpand" 
+                   Margin="20"/>
+
+            <Button Grid.Row="1" 
+                    Margin="{StaticResource ActionButtonMargin}" 
+                    Style="{StaticResource ActionButton}" 
+                    Text="{extensions:Translate Close}"  
+                    Command="{Binding CloseCommand}"/>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

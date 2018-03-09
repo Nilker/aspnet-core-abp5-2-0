@@ -1,0 +1,18 @@
+@using XyAuto.It.Web.Areas.AppAreaName.Models.Common.Modals
+@using XyAuto.It.Web.Areas.AppAreaName.Models.Tenants
+@model TenantFeaturesEditViewModel
+
+
+@Html.Partial("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Features") + " - " + Model.Tenant.Name))
+
+<div class="modal-body">
+    @Html.Partial("~/Areas/AppAreaName/Views/Common/_FeaturesTree.cshtml", Model)
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default pull-left reset-features-button" data-toggle="tooltip" title="@L("ResetFeaturesTooltip")" data-placement="left"><span>@L("ResetSpecialFeatures")</span></button>
+    <button type="button" class="btn default close-button" data-dismiss="modal">@L("Cancel")</button>
+    <button type="button" class="btn btn-primary save-button"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+</div>
+
+

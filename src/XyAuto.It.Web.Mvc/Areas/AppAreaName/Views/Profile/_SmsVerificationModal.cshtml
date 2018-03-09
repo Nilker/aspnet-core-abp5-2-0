@@ -1,0 +1,16 @@
+@using XyAuto.It.Web.Areas.AppAreaName.Models.Common.Modals
+
+@Html.Partial("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("VerifyYourCode")))
+
+<div class="modal-body">    
+    <form name="SmsVerificationModalForm">
+        <div class="form-group">
+            <div  id="inputDiv" class="form-group">
+                <label>@L("YourCode")</label>
+                <input class="form-control edited" type="text" name="Code" required maxlength="6" minlength="6">
+            </div>
+        </div>
+        <button id="verifyButton" class="btn blue">@L("Verify")</button>
+    </form>
+</div>
+

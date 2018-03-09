@@ -1,0 +1,10 @@
+﻿using System;
+using Abp.Application.Services.Dto;
+
+namespace {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos
+{
+    public class {{Entity_Name_Here}}Dto : EntityDtoPrimary_Key_Here
+    {
+{{Property_Looped_Template_Here}}
+    }
+}

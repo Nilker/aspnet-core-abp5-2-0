@@ -1,0 +1,86 @@
+﻿using System;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using Abp.Linq.Extensions;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Abp.Domain.Repositories;
+using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos;
+using Abp.Application.Services.Dto;
+using {{Namespace_Here}}.Authorization;
+using Abp.Authorization;
+using Microsoft.EntityFrameworkCore;
+
+namespace {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}
+{
+	[AbpAuthorize(AppPermissions.{{Permission_Name_Here}})]
+    public class {{Namespace_Relative_Here}}AppService : {{Project_Name_Here}}AppServiceBase, I{{Namespace_Relative_Here}}AppService
+    {
+		 private readonly IRepository<{{Entity_Name_Here}}{{Primary_Key_2_Here}}> _{{entity_Name_Here}}Repository;
+
+		  public {{Namespace_Relative_Here}}AppService(IRepository<{{Entity_Name_Here}}{{Primary_Key_2_Here}}> {{entity_Name_Here}}Repository) 
+		  {
+			_{{entity_Name_Here}}Repository = {{entity_Name_Here}}Repository;
+		  }
+
+		 public async Task<PagedResultDto<{{Entity_Name_Here}}Dto>> GetAll(GetAll{{Entity_Name_Plural_Here}}Input input)
+         {
+            var query = _{{entity_Name_Here}}Repository.GetAll().WhereIf(
+                    !string.IsNullOrWhiteSpace(input.Filter),
+                    e => {{Property_Looped_Template_Here}}
+                );
+
+            var totalCount = await query.CountAsync();
+
+            var {{entity_Name_Plural_Here}} = await query
+                .OrderBy(input.Sorting ?? "id asc")
+                .PageBy(input)
+                .ToListAsync();
+
+            return new PagedResultDto<{{Entity_Name_Here}}Dto>(
+                totalCount,
+                ObjectMapper.Map<List<{{Entity_Name_Here}}Dto>>({{entity_Name_Plural_Here}})
+            );
+         }
+		 
+		 [AbpAuthorize(AppPermissions.{{Permission_Name_Here}}_Edit)]
+		 public async Task<CreateOrEdit{{Entity_Name_Here}}Dto> Get{{Entity_Name_Here}}ForEdit(EntityDto{{Primary_Key_3_Here}} input)
+         {
+            var {{entity_Name_Here}} = await _{{entity_Name_Here}}Repository.FirstOrDefaultAsync(input.Id);
+            return ObjectMapper.Map<CreateOrEdit{{Entity_Name_Here}}Dto>({{entity_Name_Here}});
+         }
+
+		 public async Task CreateOrEdit(CreateOrEdit{{Entity_Name_Here}}Dto input)
+         {
+            if(input.Id == null){
+				await Create(input);
+			}
+			else{
+				await Update(input);
+			}
+         }
+
+		 [AbpAuthorize(AppPermissions.{{Permission_Name_Here}}_Create)]
+		 private async Task Create(CreateOrEdit{{Entity_Name_Here}}Dto input)
+         {
+            var {{entity_Name_Here}} = ObjectMapper.Map<{{Entity_Name_Here}}>(input);
+
+			{{Set_Tenant_Id_Here}}
+
+            await _{{entity_Name_Here}}Repository.InsertAsync({{entity_Name_Here}});
+         }
+
+		 [AbpAuthorize(AppPermissions.{{Permission_Name_Here}}_Edit)]
+		 private async Task Update(CreateOrEdit{{Entity_Name_Here}}Dto input)
+         {
+            var {{entity_Name_Here}} = await _{{entity_Name_Here}}Repository.FirstOrDefaultAsync((Primary_Key_Here)input.Id);
+             ObjectMapper.Map(input, {{entity_Name_Here}});
+         }
+
+		 [AbpAuthorize(AppPermissions.{{Permission_Name_Here}}_Delete)]
+         public async Task Delete(EntityDto{{Primary_Key_3_Here}} input)
+         {
+            await _{{entity_Name_Here}}Repository.DeleteAsync(input.Id);
+         }
+    }
+}

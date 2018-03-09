@@ -1,0 +1,14 @@
+﻿using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos;
+
+namespace {{Namespace_Here}}.Web.Areas.{{App_Area_Name_Here}}.Models.{{Namespace_Relative_Full_Here}}
+{
+    public class CreateOrEdit{{Entity_Name_Here}}ModalViewModel
+    {
+       public CreateOrEdit{{Entity_Name_Here}}Dto {{Entity_Name_Here}} { get; set; }
+
+	   public bool IsEditMode
+        {
+            get { return {{Entity_Name_Here}}.Id.HasValue; }
+        }
+    }
+}

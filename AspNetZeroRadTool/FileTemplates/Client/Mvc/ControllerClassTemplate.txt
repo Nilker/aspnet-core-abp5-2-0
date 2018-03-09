@@ -1,0 +1,55 @@
+﻿using System;
+using System.Threading.Tasks;
+using Abp.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using {{Namespace_Here}}.Web.Areas.{{App_Area_Name_Here}}.Models.{{Namespace_Relative_Full_Here}};
+using {{Namespace_Here}}.Web.Controllers;
+using {{Namespace_Here}}.Authorization;
+using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}};
+using {{Namespace_Here}}.{{Namespace_Relative_Full_Here}}.Dtos;
+using Abp.Application.Services.Dto;
+
+namespace {{Namespace_Here}}.Web.Areas.{{App_Area_Name_Here}}.Controllers
+{
+    [Area("{{App_Area_Name_Here}}")]
+    [AbpMvcAuthorize(AppPermissions.{{Permission_Name_Here}})]
+    public class {{Namespace_Relative_Here}}Controller : {{Project_Name_Here}}ControllerBase
+    {
+        private readonly I{{Namespace_Relative_Here}}AppService _{{namespace_Relative_Here}}AppService;
+
+        public {{Namespace_Relative_Here}}Controller(I{{Namespace_Relative_Here}}AppService {{namespace_Relative_Here}}AppService)
+        {
+            _{{namespace_Relative_Here}}AppService = {{namespace_Relative_Here}}AppService;
+        }
+
+        public ActionResult Index()
+        {
+            var model = new {{Namespace_Relative_Here}}ViewModel
+			{
+				FilterText = ""
+			};
+
+            return View(model);
+        }
+
+        [AbpMvcAuthorize(AppPermissions.{{Permission_Name_Here}}_Create, AppPermissions.{{Permission_Name_Here}}_Edit)]
+        public async Task<PartialViewResult> CreateOrEditModal(Primary_Key_Here? id)
+        {
+			CreateOrEdit{{Entity_Name_Here}}Dto {{entity_Name_Here}};
+
+			if (id.HasValue){
+				{{entity_Name_Here}} = await _{{namespace_Relative_Here}}AppService.Get{{Entity_Name_Here}}ForEdit(new EntityDto{{Primary_Key_3_Here}} { Id = (Primary_Key_Here) id });
+			}
+			else{
+				{{entity_Name_Here}} = new CreateOrEdit{{Entity_Name_Here}}Dto();
+			}
+
+            var viewModel = new CreateOrEdit{{Entity_Name_Here}}ModalViewModel()
+            {
+				{{Entity_Name_Here}} = {{entity_Name_Here}}
+            };
+
+            return PartialView("_CreateOrEditModal", viewModel);
+        }
+    }
+}

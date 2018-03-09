@@ -1,0 +1,20 @@
+@using Abp.MultiTenancy
+@using XyAuto.It.Web.Areas.AppAreaName.Models.Common.Modals
+@using XyAuto.It.Web.Views.Shared.Components.TenantChange
+@model ChangeModalViewModel
+@{
+    Layout = null;
+}
+@Html.Partial("~/Areas/AppAreaName/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ChangeTenant")))
+
+<div class="modal-body">
+    <form name="TenantChangeForm" role="form" novalidate class="form-validation">
+        <div class="form-group">
+            <label>@L("TenancyName")</label>
+            <input class="form-control" type="text" name="TenancyName" maxlength="@AbpTenantBase.MaxTenancyNameLength" value="@Model.TenancyName">
+            <span class="m-form__help">@L("LeaveEmptyToSwitchToHost")</span>
+        </div>
+    </form>
+</div>
+
+@Html.Partial("~/Areas/AppAreaName/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

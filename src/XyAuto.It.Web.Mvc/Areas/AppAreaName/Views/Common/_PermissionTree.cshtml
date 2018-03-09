@@ -1,0 +1,6 @@
+@using XyAuto.It.Web.Areas.AppAreaName.Models.Common
+@model IPermissionsEditViewModel
+
+<div class="permission-tree">
+    @Html.Partial("~/Areas/AppAreaName/Views/Common/_PermissionTreeItem.cshtml", new PermissionTreeItemModel(Model, null))
+</div>
