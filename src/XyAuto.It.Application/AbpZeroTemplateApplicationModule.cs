@@ -2,6 +2,10 @@ using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using XyAuto.It.Authorization;
+using XyAuto.It.Books.Authorization;
+using XyAuto.It.Books.Dtos.CustomMapper;
+using XyAuto.It.Courseses.Authorization;
+using XyAuto.It.Courseses.Dtos.CustomMapper;
 
 namespace XyAuto.It
 {
@@ -18,8 +22,20 @@ namespace XyAuto.It
             //Adding authorization providers
             Configuration.Authorization.Providers.Add<AppAuthorizationProvider>();
 
+            Configuration.Authorization.Providers.Add<BookAppAuthorizationProvider>();
+
+            Configuration.Authorization.Providers.Add<CoursesAppAuthorizationProvider>();
+
             //Adding custom AutoMapper configuration
-            Configuration.Modules.AbpAutoMapper().Configurators.Add(CustomDtoMapper.CreateMappings);
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(
+                configuration => 
+                {
+                    CustomDtoMapper.CreateMappings(configuration);
+                    CustomerBookMapper.CreateMappings(configuration);
+                    CustomerCoursesMapper.CreateMappings(configuration);
+                });
+                //CustomDtoMapper.CreateMappings);
+
         }
 
         public override void Initialize()

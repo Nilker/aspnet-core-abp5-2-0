@@ -5,11 +5,13 @@ using XyAuto.It.Authorization.Roles;
 using XyAuto.It.Authorization.Users;
 using XyAuto.It.Chat;
 using XyAuto.It.Editions;
+using XyAuto.It.EntityMapper.Books;
 using XyAuto.It.Friendships;
 using XyAuto.It.MultiTenancy;
 using XyAuto.It.MultiTenancy.Accounting;
 using XyAuto.It.MultiTenancy.Payments;
 using XyAuto.It.Storage;
+using XyAuto.It.Test;
 
 namespace XyAuto.It.EntityFrameworkCore
 {
@@ -30,6 +32,10 @@ namespace XyAuto.It.EntityFrameworkCore
         public virtual DbSet<Invoice> Invoices { get; set; }
 
         public virtual DbSet<PersistedGrantEntity> PersistedGrants { get; set; }
+
+
+
+        public DbSet<Book> Books { get; set; }
 
         public AbpZeroTemplateDbContext(DbContextOptions<AbpZeroTemplateDbContext> options)
             : base(options)
@@ -74,8 +80,11 @@ namespace XyAuto.It.EntityFrameworkCore
                 b.HasIndex(e => new { e.PaymentId, e.Gateway });
             });
 
+
+            modelBuilder.ApplyConfiguration(new BookCfg());
+
             modelBuilder.ConfigurePersistedGrantEntity();
-        }
+        }     
     }
 }
 

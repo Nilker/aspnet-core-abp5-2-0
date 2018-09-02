@@ -11,15 +11,12 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
-using XyAuto.It.Chat;
 using XyAuto.It.EntityFrameworkCore;
-using XyAuto.It.Friendships;
-using XyAuto.It.MultiTenancy.Payments;
 
-namespace XyAuto.It.Migrations
+namespace XyAuto.It.Migrations.SecondDb
 {
-    [DbContext(typeof(AbpZeroTemplateDbContext))]
-    partial class AbpZeroTemplateDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SecondDbContext))]
+    partial class SecondDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -41,9 +38,6 @@ namespace XyAuto.It.Migrations
 
                     b.Property<DateTime?>("DeletionTime");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasMaxLength(64);
@@ -61,8 +55,6 @@ namespace XyAuto.It.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AbpEditions");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Edition");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.FeatureSetting", b =>
@@ -99,20 +91,15 @@ namespace XyAuto.It.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BrowserInfo")
-                        .HasMaxLength(256);
+                    b.Property<string>("BrowserInfo");
 
-                    b.Property<string>("ClientIpAddress")
-                        .HasMaxLength(64);
+                    b.Property<string>("ClientIpAddress");
 
-                    b.Property<string>("ClientName")
-                        .HasMaxLength(128);
+                    b.Property<string>("ClientName");
 
-                    b.Property<string>("CustomData")
-                        .HasMaxLength(2000);
+                    b.Property<string>("CustomData");
 
-                    b.Property<string>("Exception")
-                        .HasMaxLength(2000);
+                    b.Property<string>("Exception");
 
                     b.Property<int>("ExecutionDuration");
 
@@ -122,26 +109,17 @@ namespace XyAuto.It.Migrations
 
                     b.Property<long?>("ImpersonatorUserId");
 
-                    b.Property<string>("MethodName")
-                        .HasMaxLength(256);
+                    b.Property<string>("MethodName");
 
-                    b.Property<string>("Parameters")
-                        .HasMaxLength(1024);
+                    b.Property<string>("Parameters");
 
-                    b.Property<string>("ServiceName")
-                        .HasMaxLength(256);
+                    b.Property<string>("ServiceName");
 
                     b.Property<int?>("TenantId");
 
                     b.Property<long?>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "ExecutionDuration");
-
-                    b.HasIndex("TenantId", "ExecutionTime");
-
-                    b.HasIndex("TenantId", "UserId");
 
                     b.ToTable("AbpAuditLogs");
                 });
@@ -167,8 +145,6 @@ namespace XyAuto.It.Migrations
                     b.Property<int?>("TenantId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "Name");
 
                     b.ToTable("AbpPermissions");
 
@@ -196,8 +172,6 @@ namespace XyAuto.It.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("TenantId", "ClaimType");
 
                     b.ToTable("AbpRoleClaims");
                 });
@@ -237,16 +211,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmailAddress");
-
-                    b.HasIndex("UserName");
-
-                    b.HasIndex("TenantId", "EmailAddress");
-
-                    b.HasIndex("TenantId", "UserId");
-
-                    b.HasIndex("TenantId", "UserName");
-
                     b.ToTable("AbpUserAccounts");
                 });
 
@@ -272,8 +236,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("TenantId", "ClaimType");
-
                     b.ToTable("AbpUserClaims");
                 });
 
@@ -297,10 +259,6 @@ namespace XyAuto.It.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("TenantId", "UserId");
-
-                    b.HasIndex("TenantId", "LoginProvider", "ProviderKey");
 
                     b.ToTable("AbpUserLogins");
                 });
@@ -335,10 +293,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId", "TenantId");
-
-                    b.HasIndex("TenancyName", "UserNameOrEmailAddress", "Result");
-
                     b.ToTable("AbpUserLoginAttempts");
                 });
 
@@ -360,10 +314,6 @@ namespace XyAuto.It.Migrations
                     b.Property<long>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "OrganizationUnitId");
-
-                    b.HasIndex("TenantId", "UserId");
 
                     b.ToTable("AbpUserOrganizationUnits");
                 });
@@ -387,10 +337,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("TenantId", "RoleId");
-
-                    b.HasIndex("TenantId", "UserId");
-
                     b.ToTable("AbpUserRoles");
                 });
 
@@ -412,8 +358,6 @@ namespace XyAuto.It.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("TenantId", "UserId");
 
                     b.ToTable("AbpUserTokens");
                 });
@@ -447,8 +391,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IsAbandoned", "NextTryTime");
-
                     b.ToTable("AbpBackgroundJobs");
                 });
 
@@ -480,8 +422,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.HasIndex("TenantId", "Name");
-
                     b.ToTable("AbpSettings");
                 });
 
@@ -507,8 +447,6 @@ namespace XyAuto.It.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EntityChangeSetId");
-
-                    b.HasIndex("EntityTypeFullName", "EntityId");
 
                     b.ToTable("AbpEntityChanges");
                 });
@@ -544,12 +482,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId", "CreationTime");
-
-                    b.HasIndex("TenantId", "Reason");
-
-                    b.HasIndex("TenantId", "UserId");
-
                     b.ToTable("AbpEntityChangeSets");
                 });
 
@@ -584,30 +516,21 @@ namespace XyAuto.It.Migrations
             modelBuilder.Entity("Abp.IdentityServer4.PersistedGrantEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasMaxLength(200);
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("ClientId");
 
                     b.Property<DateTime>("CreationTime");
 
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasMaxLength(50000);
+                    b.Property<string>("Data");
 
                     b.Property<DateTime?>("Expiration");
 
-                    b.Property<string>("SubjectId")
-                        .HasMaxLength(200);
+                    b.Property<string>("SubjectId");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Type");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubjectId", "ClientId", "Type");
 
                     b.ToTable("AbpPersistedGrants");
                 });
@@ -648,8 +571,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId", "Name");
-
                     b.ToTable("AbpLanguages");
                 });
 
@@ -685,8 +606,6 @@ namespace XyAuto.It.Migrations
                         .HasMaxLength(67108864);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId", "Source", "LanguageName", "Key");
 
                     b.ToTable("AbpLanguageTexts");
                 });
@@ -762,10 +681,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NotificationName", "EntityTypeName", "EntityId", "UserId");
-
-                    b.HasIndex("TenantId", "NotificationName", "EntityTypeName", "EntityId", "UserId");
-
                     b.ToTable("AbpNotificationSubscriptions");
                 });
 
@@ -803,8 +718,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("AbpTenantNotifications");
                 });
 
@@ -824,8 +737,6 @@ namespace XyAuto.It.Migrations
                     b.Property<long>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId", "State", "CreationTime");
 
                     b.ToTable("AbpUserNotifications");
                 });
@@ -865,8 +776,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.HasIndex("TenantId", "Code");
-
                     b.ToTable("AbpOrganizationUnits");
                 });
 
@@ -875,8 +784,7 @@ namespace XyAuto.It.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                    b.Property<string>("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime");
 
@@ -918,8 +826,6 @@ namespace XyAuto.It.Migrations
 
                     b.HasIndex("LastModifierUserId");
 
-                    b.HasIndex("TenantId", "NormalizedName");
-
                     b.ToTable("AbpRoles");
                 });
 
@@ -933,8 +839,7 @@ namespace XyAuto.It.Migrations
                     b.Property<string>("AuthenticationSource")
                         .HasMaxLength(64);
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
+                    b.Property<string>("ConcurrencyStamp");
 
                     b.Property<DateTime>("CreationTime");
 
@@ -1016,163 +921,7 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorUserId");
-
-                    b.HasIndex("DeleterUserId");
-
-                    b.HasIndex("LastModifierUserId");
-
-                    b.HasIndex("TenantId", "NormalizedEmailAddress");
-
-                    b.HasIndex("TenantId", "NormalizedUserName");
-
                     b.ToTable("AbpUsers");
-                });
-
-            modelBuilder.Entity("XyAuto.It.Chat.ChatMessage", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreationTime");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(4096);
-
-                    b.Property<int>("ReadState");
-
-                    b.Property<int>("ReceiverReadState");
-
-                    b.Property<Guid?>("SharedMessageId");
-
-                    b.Property<int>("Side");
-
-                    b.Property<int?>("TargetTenantId");
-
-                    b.Property<long>("TargetUserId");
-
-                    b.Property<int?>("TenantId");
-
-                    b.Property<long>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TargetTenantId", "TargetUserId", "ReadState");
-
-                    b.HasIndex("TargetTenantId", "UserId", "ReadState");
-
-                    b.HasIndex("TenantId", "TargetUserId", "ReadState");
-
-                    b.HasIndex("TenantId", "UserId", "ReadState");
-
-                    b.ToTable("AppChatMessages");
-                });
-
-            modelBuilder.Entity("XyAuto.It.Friendships.Friendship", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreationTime");
-
-                    b.Property<Guid?>("FriendProfilePictureId");
-
-                    b.Property<string>("FriendTenancyName");
-
-                    b.Property<int?>("FriendTenantId");
-
-                    b.Property<long>("FriendUserId");
-
-                    b.Property<string>("FriendUserName")
-                        .IsRequired()
-                        .HasMaxLength(32);
-
-                    b.Property<int>("State");
-
-                    b.Property<int?>("TenantId");
-
-                    b.Property<long>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FriendTenantId", "FriendUserId");
-
-                    b.HasIndex("FriendTenantId", "UserId");
-
-                    b.HasIndex("TenantId", "FriendUserId");
-
-                    b.HasIndex("TenantId", "UserId");
-
-                    b.ToTable("AppFriendships");
-                });
-
-            modelBuilder.Entity("XyAuto.It.MultiTenancy.Accounting.Invoice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("InvoiceDate");
-
-                    b.Property<string>("InvoiceNo");
-
-                    b.Property<string>("TenantAddress");
-
-                    b.Property<string>("TenantLegalName");
-
-                    b.Property<string>("TenantTaxNo");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppInvoices");
-                });
-
-            modelBuilder.Entity("XyAuto.It.MultiTenancy.Payments.SubscriptionPayment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal>("Amount");
-
-                    b.Property<DateTime>("CreationTime");
-
-                    b.Property<long?>("CreatorUserId");
-
-                    b.Property<int>("DayCount");
-
-                    b.Property<long?>("DeleterUserId");
-
-                    b.Property<DateTime?>("DeletionTime");
-
-                    b.Property<int>("EditionId");
-
-                    b.Property<int>("Gateway");
-
-                    b.Property<string>("InvoiceNo");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime");
-
-                    b.Property<long?>("LastModifierUserId");
-
-                    b.Property<string>("PaymentId");
-
-                    b.Property<int?>("PaymentPeriodType");
-
-                    b.Property<int>("Status");
-
-                    b.Property<int>("TenantId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EditionId");
-
-                    b.HasIndex("PaymentId", "Gateway");
-
-                    b.HasIndex("Status", "CreationTime");
-
-                    b.ToTable("AppSubscriptionPayments");
                 });
 
             modelBuilder.Entity("XyAuto.It.MultiTenancy.Tenant", b =>
@@ -1187,9 +936,13 @@ namespace XyAuto.It.Migrations
 
                     b.Property<long?>("CreatorUserId");
 
+                    b.Property<long?>("CreatorUserId1");
+
                     b.Property<Guid?>("CustomCssId");
 
                     b.Property<long?>("DeleterUserId");
+
+                    b.Property<long?>("DeleterUserId1");
 
                     b.Property<DateTime?>("DeletionTime");
 
@@ -1204,6 +957,8 @@ namespace XyAuto.It.Migrations
                     b.Property<DateTime?>("LastModificationTime");
 
                     b.Property<long?>("LastModifierUserId");
+
+                    b.Property<long?>("LastModifierUserId1");
 
                     b.Property<string>("LogoFileType")
                         .HasMaxLength(64);
@@ -1222,78 +977,34 @@ namespace XyAuto.It.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreationTime");
+                    b.HasIndex("CreatorUserId1");
 
-                    b.HasIndex("CreatorUserId");
-
-                    b.HasIndex("DeleterUserId");
+                    b.HasIndex("DeleterUserId1");
 
                     b.HasIndex("EditionId");
 
-                    b.HasIndex("LastModifierUserId");
-
-                    b.HasIndex("SubscriptionEndDateUtc");
-
-                    b.HasIndex("TenancyName");
+                    b.HasIndex("LastModifierUserId1");
 
                     b.ToTable("AbpTenants");
                 });
 
-            modelBuilder.Entity("XyAuto.It.Storage.BinaryObject", b =>
+            modelBuilder.Entity("XyAuto.It.Test.Courses", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("Bytes")
-                        .IsRequired();
-
-                    b.Property<int?>("TenantId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("AppBinaryObjects");
-                });
-
-            modelBuilder.Entity("XyAuto.It.Test.Book", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("EmailAddress")
+                    b.Property<int>("CoursesID")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(65);
 
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("CourseName")
                         .HasMaxLength(65);
 
-                    b.Property<string>("Surname")
-                        .IsRequired()
+                    b.Property<int>("Id");
+
+                    b.Property<string>("Standard")
                         .HasMaxLength(65);
 
-                    b.HasKey("Id");
+                    b.HasKey("CoursesID");
 
-                    b.ToTable("Books","CMS");
-                });
-
-            modelBuilder.Entity("XyAuto.It.Editions.SubscribableEdition", b =>
-                {
-                    b.HasBaseType("Abp.Application.Editions.Edition");
-
-                    b.Property<decimal?>("AnnualPrice");
-
-                    b.Property<int?>("ExpiringEditionId");
-
-                    b.Property<decimal?>("MonthlyPrice");
-
-                    b.Property<int?>("TrialDayCount");
-
-                    b.Property<int?>("WaitingDayAfterExpire");
-
-                    b.ToTable("AbpEditions");
-
-                    b.HasDiscriminator().HasValue("SubscribableEdition");
+                    b.ToTable("Courseses","CMS");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>
@@ -1302,7 +1013,7 @@ namespace XyAuto.It.Migrations
 
                     b.Property<int>("EditionId");
 
-                    b.HasIndex("EditionId", "Name");
+                    b.HasIndex("EditionId");
 
                     b.ToTable("AbpFeatures");
 
@@ -1313,8 +1024,6 @@ namespace XyAuto.It.Migrations
                 {
                     b.HasBaseType("Abp.Application.Features.FeatureSetting");
 
-
-                    b.HasIndex("TenantId", "Name");
 
                     b.ToTable("AbpFeatures");
 
@@ -1432,38 +1141,15 @@ namespace XyAuto.It.Migrations
                         .HasForeignKey("LastModifierUserId");
                 });
 
-            modelBuilder.Entity("XyAuto.It.Authorization.Users.User", b =>
-                {
-                    b.HasOne("XyAuto.It.Authorization.Users.User", "CreatorUser")
-                        .WithMany()
-                        .HasForeignKey("CreatorUserId");
-
-                    b.HasOne("XyAuto.It.Authorization.Users.User", "DeleterUser")
-                        .WithMany()
-                        .HasForeignKey("DeleterUserId");
-
-                    b.HasOne("XyAuto.It.Authorization.Users.User", "LastModifierUser")
-                        .WithMany()
-                        .HasForeignKey("LastModifierUserId");
-                });
-
-            modelBuilder.Entity("XyAuto.It.MultiTenancy.Payments.SubscriptionPayment", b =>
-                {
-                    b.HasOne("Abp.Application.Editions.Edition", "Edition")
-                        .WithMany()
-                        .HasForeignKey("EditionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("XyAuto.It.MultiTenancy.Tenant", b =>
                 {
                     b.HasOne("XyAuto.It.Authorization.Users.User", "CreatorUser")
                         .WithMany()
-                        .HasForeignKey("CreatorUserId");
+                        .HasForeignKey("CreatorUserId1");
 
                     b.HasOne("XyAuto.It.Authorization.Users.User", "DeleterUser")
                         .WithMany()
-                        .HasForeignKey("DeleterUserId");
+                        .HasForeignKey("DeleterUserId1");
 
                     b.HasOne("Abp.Application.Editions.Edition", "Edition")
                         .WithMany()
@@ -1471,7 +1157,7 @@ namespace XyAuto.It.Migrations
 
                     b.HasOne("XyAuto.It.Authorization.Users.User", "LastModifierUser")
                         .WithMany()
-                        .HasForeignKey("LastModifierUserId");
+                        .HasForeignKey("LastModifierUserId1");
                 });
 
             modelBuilder.Entity("Abp.Application.Features.EditionFeatureSetting", b =>

@@ -39,6 +39,20 @@ namespace XyAuto.It.EntityFrameworkCore
                         AbpZeroTemplateDbContextConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
                     }
                 });
+
+                //第二个数据库
+                // Configure second DbContext
+                Configuration.Modules.AbpEfCore().AddDbContext<SecondDbContext>(options =>
+                {
+                    if (options.ExistingConnection != null)
+                    {
+                        SecondDbContextConfigurer.Configure(options.DbContextOptions, options.ExistingConnection);
+                    }
+                    else
+                    {
+                        SecondDbContextConfigurer.Configure(options.DbContextOptions, options.ConnectionString);
+                    }
+                });
             }
 
             //Uncomment below line to write change logs for the entities below:
