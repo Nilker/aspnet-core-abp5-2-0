@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Abp.AspNetZeroCore.Net;
+using ORS.AspNetZeroCore.Net;
 using Abp.Collections.Extensions;
 using Abp.Dependency;
 using XyAuto.It.Dto;

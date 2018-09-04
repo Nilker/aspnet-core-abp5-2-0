@@ -3,8 +3,8 @@ using System.IO;
 using System.Text;
 using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
-using Abp.AspNetZeroCore.Licensing;
-using Abp.AspNetZeroCore.Web;
+//using ORS.AspNetZeroCore.Licensing;
+using ORS.AspNetZeroCore.Web;
 using Abp.Configuration.Startup;
 using Abp.Dependency;
 using Abp.Hangfire;
@@ -31,7 +31,7 @@ namespace XyAuto.It.Web
     [DependsOn(
         typeof(AbpZeroTemplateApplicationModule),
         typeof(AbpZeroTemplateEntityFrameworkCoreModule),
-        typeof(AbpAspNetZeroCoreWebModule),
+        typeof(AspNetZeroCoreWebModule),
 #if FEATURE_SIGNALR
         typeof(AbpWebSignalRModule),
 #endif

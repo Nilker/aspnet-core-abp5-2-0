@@ -26,7 +26,6 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
         <PackageReference Include="Castle.Windsor.MsDependencyInjection" Version="3.3.0" />
         <PackageReference Include="TimeZoneConverter" Version="2.2.1" />
-        <PackageReference Include="Abp.AspNetZeroCore" Version="1.1.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -54,6 +53,7 @@
 
 
     <ItemGroup>
+        <ProjectReference Include="..\ORS.AspNetZeroCore\ORS.AspNetZeroCore.csproj" />
         <ProjectReference Include="..\XyAuto.It.Core.Shared\XyAuto.It.Core.Shared.csproj" />
     </ItemGroup>
 

@@ -1,5 +1,5 @@
 using Abp.AspNetCore.Configuration;
-using Abp.AspNetZeroCore;
+using ORS.AspNetZeroCore;
 using Abp.Configuration.Startup;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
@@ -31,7 +31,7 @@ namespace XyAuto.It.Web.Startup
         public override void PreInitialize()
         {
             Configuration.Modules.AbpWebCommon().MultiTenancy.DomainFormat = _appConfiguration["App:WebSiteRootAddress"] ?? "http://localhost:62114/";
-            Configuration.Modules.AspNetZero().LicenseCode = _appConfiguration["AbpZeroLicenseCode"];
+            //Configuration.Modules.AspNetZero().LicenseCode = _appConfiguration["AbpZeroLicenseCode"];
             Configuration.Navigation.Providers.Add<AppAreaNameNavigationProvider>();
         }
 

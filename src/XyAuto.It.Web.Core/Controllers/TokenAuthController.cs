@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp;
 using Abp.AspNetCore.Mvc.Authorization;
-using Abp.AspNetZeroCore.Web.Authentication.External;
+using ORS.AspNetZeroCore.Web.Authentication.External;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.MultiTenancy;

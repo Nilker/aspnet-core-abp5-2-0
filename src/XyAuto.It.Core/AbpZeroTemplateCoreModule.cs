@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
-using Abp.AspNetZeroCore;
-using Abp.AspNetZeroCore.Timing;
+using ORS.AspNetZeroCore;
+using ORS.AspNetZeroCore.Timing;
 using Abp.AutoMapper;
 using Abp.Dependency;
 using Abp.Modules;
@@ -40,7 +40,7 @@ namespace XyAuto.It
         typeof(AbpZeroLdapModule),
 #endif
         typeof(AbpAutoMapperModule),
-        typeof(AbpAspNetZeroCoreModule),
+        typeof(AspNetZeroCoreModule),
         typeof(AbpMailKitModule))]
     public class AbpZeroTemplateCoreModule : AbpModule
     {
@@ -94,12 +94,14 @@ namespace XyAuto.It
 
             Configuration.Caching.Configure(FriendCacheItem.CacheName, cache =>
             {
-                cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(30);
+                cache.DefaultSlidingExpireTime = TimeSpan.FromSeconds(2);
             });
 
             Configuration.Caching.Configure(PaymentCacheItem.CacheName, cache =>
             {
-                cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(AbpZeroTemplateConsts.PaymentCacheDurationInMinutes);
+                //cache.DefaultSlidingExpireTime = TimeSpan.FromMinutes(AbpZeroTemplateConsts.PaymentCacheDurationInMinutes);
+                cache.DefaultSlidingExpireTime = TimeSpan.FromSeconds(2);
+
             });
         }
 

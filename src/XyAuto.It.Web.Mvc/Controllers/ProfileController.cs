@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Abp;
 using Abp.AspNetCore.Mvc.Authorization;
-using Abp.AspNetZeroCore.Net;
+using ORS.AspNetZeroCore.Net;
 using Abp.Auditing;
 using Abp.Domain.Uow;
 using Abp.Extensions;

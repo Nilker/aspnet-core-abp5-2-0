@@ -14,12 +14,12 @@
   </PropertyGroup>
  
   <ItemGroup>
+    <ProjectReference Include="..\ORS.AspNetZeroCore.Web\ORS.AspNetZeroCore.Web.csproj" />
     <ProjectReference Include="..\XyAuto.It.Application\XyAuto.It.Application.csproj" />
     <ProjectReference Include="..\XyAuto.It.EntityFrameworkCore\XyAuto.It.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Abp.AspNetZeroCore.Web" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.1" />

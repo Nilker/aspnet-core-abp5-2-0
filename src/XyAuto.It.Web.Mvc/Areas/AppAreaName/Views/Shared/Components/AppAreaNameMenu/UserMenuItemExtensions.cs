@@ -1,5 +1,5 @@
 using Abp.Application.Navigation;
-using Abp.AspNetZeroCore.Web.Url;
+using ORS.AspNetZeroCore.Web.Url;
 
 namespace XyAuto.It.Web.Areas.AppAreaName.Views.Shared.Components.AppAreaNameSideBar
 {

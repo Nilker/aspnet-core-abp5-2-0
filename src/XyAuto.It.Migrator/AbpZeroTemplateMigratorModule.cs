@@ -1,4 +1,4 @@
-using Abp.AspNetZeroCore;
+using ORS.AspNetZeroCore;
 using Abp.Events.Bus;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
@@ -29,7 +29,7 @@ namespace XyAuto.It.Migrator
             Configuration.DefaultNameOrConnectionString = _appConfiguration.GetConnectionString(
                 AbpZeroTemplateConsts.ConnectionStringName
                 );
-            Configuration.Modules.AspNetZero().LicenseCode = _appConfiguration["AbpZeroLicenseCode"];
+            //Configuration.Modules.AspNetZero().LicenseCode = _appConfiguration["AbpZeroLicenseCode"];
 
             Configuration.BackgroundJobs.IsJobExecutionEnabled = false;
             Configuration.ReplaceService(typeof(IEventBus), () =>

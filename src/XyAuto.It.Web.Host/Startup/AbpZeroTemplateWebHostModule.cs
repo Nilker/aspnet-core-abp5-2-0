@@ -1,8 +1,8 @@
-using Abp.AspNetZeroCore;
-using Abp.AspNetZeroCore.Web.Authentication.External;
-using Abp.AspNetZeroCore.Web.Authentication.External.Facebook;
-using Abp.AspNetZeroCore.Web.Authentication.External.Google;
-using Abp.AspNetZeroCore.Web.Authentication.External.Microsoft;
+using ORS.AspNetZeroCore;
+using ORS.AspNetZeroCore.Web.Authentication.External;
+//using ORS.AspNetZeroCore.Web.Authentication.External.Facebook;
+//using ORS.AspNetZeroCore.Web.Authentication.External.Google;
+//using ORS.AspNetZeroCore.Web.Authentication.External.Microsoft;
 using Abp.Configuration.Startup;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
@@ -34,7 +34,7 @@ namespace XyAuto.It.Web.Startup
         public override void PreInitialize()
         {
             Configuration.Modules.AbpWebCommon().MultiTenancy.DomainFormat = _appConfiguration["App:ServerRootAddress"] ?? "http://localhost:22742/";
-            Configuration.Modules.AspNetZero().LicenseCode = _appConfiguration["AbpZeroLicenseCode"];
+            //Configuration.Modules.AspNetZero().LicenseCode = _appConfiguration["AbpZeroLicenseCode"];
         }
 
         public override void Initialize()
@@ -56,50 +56,50 @@ namespace XyAuto.It.Web.Startup
                 workManager.Add(IocManager.Resolve<SubscriptionExpireEmailNotifierWorker>());
             }
             
-            ConfigureExternalAuthProviders();
+            //ConfigureExternalAuthProviders();
         }
 
-        private void ConfigureExternalAuthProviders()
-        {
-            var externalAuthConfiguration = IocManager.Resolve<ExternalAuthConfiguration>();
+        //private void ConfigureExternalAuthProviders()
+        //{
+        //    var externalAuthConfiguration = IocManager.Resolve<ExternalAuthConfiguration>();
 
-            if (bool.Parse(_appConfiguration["Authentication:Facebook:IsEnabled"]))
-            {
-                externalAuthConfiguration.Providers.Add(
-                    new ExternalLoginProviderInfo(
-                        FacebookAuthProviderApi.Name,
-                        _appConfiguration["Authentication:Facebook:AppId"],
-                        _appConfiguration["Authentication:Facebook:AppSecret"],
-                        typeof(FacebookAuthProviderApi)
-                    )
-                );
-            }
+        //    if (bool.Parse(_appConfiguration["Authentication:Facebook:IsEnabled"]))
+        //    {
+        //        externalAuthConfiguration.Providers.Add(
+        //            new ExternalLoginProviderInfo(
+        //                FacebookAuthProviderApi.Name,
+        //                _appConfiguration["Authentication:Facebook:AppId"],
+        //                _appConfiguration["Authentication:Facebook:AppSecret"],
+        //                typeof(FacebookAuthProviderApi)
+        //            )
+        //        );
+        //    }
 
-            if (bool.Parse(_appConfiguration["Authentication:Google:IsEnabled"]))
-            {
-                externalAuthConfiguration.Providers.Add(
-                    new ExternalLoginProviderInfo(
-                        GoogleAuthProviderApi.Name,
-                        _appConfiguration["Authentication:Google:ClientId"],
-                        _appConfiguration["Authentication:Google:ClientSecret"],
-                        typeof(GoogleAuthProviderApi)
-                    )
-                );
-            }
+        //    if (bool.Parse(_appConfiguration["Authentication:Google:IsEnabled"]))
+        //    {
+        //        externalAuthConfiguration.Providers.Add(
+        //            new ExternalLoginProviderInfo(
+        //                GoogleAuthProviderApi.Name,
+        //                _appConfiguration["Authentication:Google:ClientId"],
+        //                _appConfiguration["Authentication:Google:ClientSecret"],
+        //                typeof(GoogleAuthProviderApi)
+        //            )
+        //        );
+        //    }
 
-            //not implemented yet. Will be implemented with https://github.com/aspnetzero/aspnet-zero-angular/issues/5
-            if (bool.Parse(_appConfiguration["Authentication:Microsoft:IsEnabled"]))
-            {
-                externalAuthConfiguration.Providers.Add(
-                    new ExternalLoginProviderInfo(
-                        MicrosoftAuthProviderApi.Name,
-                        _appConfiguration["Authentication:Microsoft:ConsumerKey"],
-                        _appConfiguration["Authentication:Microsoft:ConsumerSecret"],
-                        typeof(MicrosoftAuthProviderApi)
-                    )
-                );
-            }
-        }
+        //    //not implemented yet. Will be implemented with https://github.com/aspnetzero/aspnet-zero-angular/issues/5
+        //    if (bool.Parse(_appConfiguration["Authentication:Microsoft:IsEnabled"]))
+        //    {
+        //        externalAuthConfiguration.Providers.Add(
+        //            new ExternalLoginProviderInfo(
+        //                MicrosoftAuthProviderApi.Name,
+        //                _appConfiguration["Authentication:Microsoft:ConsumerKey"],
+        //                _appConfiguration["Authentication:Microsoft:ConsumerSecret"],
+        //                typeof(MicrosoftAuthProviderApi)
+        //            )
+        //        );
+        //    }
+        //}
     }
 }
 

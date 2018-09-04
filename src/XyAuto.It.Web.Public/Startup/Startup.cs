@@ -14,7 +14,7 @@ using XyAuto.It.Identity;
 #if FEATURE_SIGNALR
 using Owin;
 using Abp.Owin;
-using Abp.AspNetZeroCore.Web.Owin;
+using ORS.AspNetZeroCore.Web.Owin;
 #endif
 
 namespace XyAuto.It.Web.Public.Startup

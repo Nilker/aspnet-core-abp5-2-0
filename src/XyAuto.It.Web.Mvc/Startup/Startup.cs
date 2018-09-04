@@ -2,7 +2,7 @@ using System;
 using System.Data.Common;
 using System.Data.SqlClient;
 using Abp.AspNetCore;
-using Abp.AspNetZeroCore.Web.Authentication.JwtBearer;
+using ORS.AspNetZeroCore.Web.Authentication.JwtBearer;
 using Abp.Authorization;
 using Abp.Castle.Logging.Log4Net;
 using Abp.Dependency;
@@ -41,7 +41,7 @@ using Owin;
 using Abp.Owin;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
-using Abp.AspNetZeroCore.Web.Owin;
+using ORS.AspNetZeroCore.Web.Owin;
 using Owin.Security.AesDataProtectorProvider;
 #endif
 
@@ -133,7 +133,7 @@ namespace XyAuto.It.Web.Startup
 
             if (bool.Parse(_appConfiguration["IdentityServer:IsEnabled"]))
             {
-                app.UseJwtTokenMiddleware("IdentityBearer");
+               // app.UseJwtTokenMiddleware("IdentityBearer");
                 app.UseIdentityServer();
             }
 

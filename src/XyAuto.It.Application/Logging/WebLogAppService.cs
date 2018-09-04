@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using Abp.AspNetZeroCore.Net;
+using ORS.AspNetZeroCore.Net;
 using Abp.Authorization;
 using Abp.IO;
 using XyAuto.It.Authorization;

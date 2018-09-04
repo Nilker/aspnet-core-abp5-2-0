@@ -1,6 +1,7 @@
 using Abp.Application.Navigation;
 using Abp.Localization;
 using XyAuto.It.Authorization;
+using XyAuto.It.Books.Authorization;
 
 namespace XyAuto.It.Web.Areas.AppAreaName.Startup
 {
@@ -45,6 +46,13 @@ namespace XyAuto.It.Web.Areas.AppAreaName.Startup
                         AppAreaNamePageNames.Common.Administration,
                         L("Administration"),
                         icon: "flaticon-interface-8"
+                    ).AddItem(new MenuItemDefinition(
+                            BookAppPermissions.Book,
+                            L("Book"),
+                            url: "AppAreaName/Book",
+                            icon: "flaticon-map",
+                            requiredPermissionName: BookAppPermissions.Book
+                        )
                     ).AddItem(new MenuItemDefinition(
                             AppAreaNamePageNames.Common.OrganizationUnits,
                             L("OrganizationUnits"),

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Abp.AspNetZeroCore.Validation;
+using ORS.AspNetZeroCore.Validation;
 using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.Extensions;
